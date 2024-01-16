@@ -1,24 +1,19 @@
-const content = [
+const defaultCards = [
+  { front: 'Front 1', back: 'Back 1<b>Bold text</b>' },
   {
-    front: 'Click this box to reveal what happens if Eric chooses to participate!',
+    front: 'Front 2',
     back:
-      "Eric chooses to participate. The doctor and researcher protect Eric's privacy and the data is used for research. The researcher shares the findings from their work with Eric and his family.",
+      "Back 2. <img width='80px' height='30px' src='https://wise.berkeley.edu/assets/img/wise-web-header-img@2x.webp'></img>",
   },
-  {
-    front: 'Click this box to reveal what happens if Eric chooses not to participate!',
-    back:
-      'Eric chooses not to participate. The researcher respects his choice and ask if he wants to be asked about other studies in the future. Eric and parents say yes. Research continues with different participants who said yes.',
-  },
-  {
-    front: 'Click this box to reveal what happens if Eric takes more time to decide!',
-    back:
-      'Eric and his parents decide they need more time to decide. Eric and his parents have a meeting with the researcher and prepare more question. The meeting provides a lot of information and Eric and his family revisit their decision at his next doctor’s appointment.',
-  },
+  { front: 'Front 3', back: 'Back 3' },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
+  const queryString = window.location.search || 'cards=' + JSON.stringify(defaultCards);
+  const searchParams = new URLSearchParams(queryString);
+  const cards = JSON.parse(searchParams.get('cards'));
   const app = document.getElementById('app');
-  content.forEach((card) => {
+  cards.forEach((card) => {
     app.appendChild(createCardElement(card));
   });
 });
